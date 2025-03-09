@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = ['https://algorithmerz.in', 'https://dsavisualizationbackend-tmii.onrender.com','https://dsavisualizationfrontend-eccu.onrender.com'];
+const allowedOrigins = ['https://algorithmerz.in', 'https://dsavisualizationbackend-tmii.onrender.com','https://dsavisualizationfrontend-62nc.onrender.com'];
 
 
 app.use(cors({
