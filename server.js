@@ -16,7 +16,7 @@ const allowedOrigins = ['https://algorithmerz.in', 'https://dsavisualizationback
 
 app.use(cors({
   origin: allowedOrigins, // Allow specific origins
-  methods: ['GET', 'POST'], // Allow specific HTTP methods (adjust as needed)
+  methods: ['GET,POST,PUT,DELETE'],
   credentials: true, // If you need to send cookies or authorization headers
 }));
 
