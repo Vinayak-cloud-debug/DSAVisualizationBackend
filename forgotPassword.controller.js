@@ -4,7 +4,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const validator = require('validator');
-const User = require('../models/user.models');
+const User = require('./user.models');
 const rateLimit = require('express-rate-limit');
 const router = express.Router();
 
