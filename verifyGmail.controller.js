@@ -2,7 +2,7 @@
 
 const express = require('express');
 const nodemailer = require('nodemailer');
-const User = require('../models/user.models');
+const User = require('./user.models');
 const router = express.Router();
 const validator = require('validator');
 
