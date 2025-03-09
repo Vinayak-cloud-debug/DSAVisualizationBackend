@@ -10,6 +10,8 @@ const validator = require('validator');
 
 router.post('/Verify-Gmail',  async (req, res) => {
 
+  console.log(req.body)
+
     const {GmailValue} = req.body
 
   try {

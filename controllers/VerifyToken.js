@@ -24,6 +24,7 @@ const VerifyToken = async (req, res, next) => {
 		}
 
 		req.user = user;
+		
 
 		res.status(200).json({message: "Valid Guy",output:1})
 	} catch (error) {

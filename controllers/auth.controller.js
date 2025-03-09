@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.models");
 const generateTokenAndSetCookie = require("../utils/generateToken");
+const jwt = require('jsonwebtoken')
 
 const signup = async (req, res) => {
   try {
@@ -35,9 +36,10 @@ const signup = async (req, res) => {
 
     if (newUser) {
       // Generate JWT token here
-      generateTokenAndSetCookie(newUser._id, res);
+      const token = generateTokenAndSetCookie(newUser._id, res);
 
-    
+      console.log("token "+token)
+      
       await newUser.save();
 
       res.status(201).json({
@@ -47,7 +49,7 @@ const signup = async (req, res) => {
         profilePic: newUser.profilePic,
       });
 
-      
+    
 
      
     } else {
@@ -61,17 +63,20 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+    
+    console.log("Inside Login")
 
     if (!user || !isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
-    generateTokenAndSetCookie(user._id, res);
+    const token = generateTokenAndSetCookie(user._id, res);
 
-
+    console.log("token "+token)
 
 
     res.status(200).json({
@@ -90,13 +95,27 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    res.cookie("jwt", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      expires: new Date(0), // Set an explicit expiration date (past date)
+    });
+
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "development",
+      sameSite: "Strict",
+    });
+
+
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.log("Error in logout controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 module.exports = {
   signup,

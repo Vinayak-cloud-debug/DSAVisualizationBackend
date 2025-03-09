@@ -18,6 +18,8 @@ const forgotPasswordLimiter = rateLimit({
 router.post('/forgot-password', forgotPasswordLimiter, async (req, res) => {
   const { email } = req.body;
 
+  console.log(req.body)
+
   try {
     // Validate email format
     if (!email || !validator.isEmail(email)) {
