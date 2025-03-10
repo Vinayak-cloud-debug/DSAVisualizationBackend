@@ -53,7 +53,7 @@ app.listen(PORT, () => {
 
 
 
-const BACKEND_URL = "https://dsavisualizationbackend-4.onrender.com"; // Replace with your real backend URL
+const BACKEND_URL = "https://dsavisualizationbackend-tmii.onrender.com"; // Replace with your real backend URL
 
 setInterval(async () => {
     try {
